@@ -1,43 +1,107 @@
+
 <!DOCTYPE html><html><head>
-<script src="/cdn-cgi/apps/head/aqhzBqkyhgXFT9tYquvCBE2xpuY.js"></script><style>div a img{visibility:hidden;}</style>
+<title>EJALTV</title>
+<style>div a img{visibility:hidden;}body{margin:0;background-color: black;}</style>
 <meta name='viewport' content='width=device-width, initial-scale=1.0' />
 <meta name="referrer" content="no-referrer" />
-<script src='https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.1.1/shaka-player.ui.min.js' crossorigin='anonymous'></script>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.1.1/controls.min.css' crossorigin='anonymous' />
-<script async src='/cdn-cgi/challenge-platform/h/g/scripts/invisible.js?cb=6ebfddfd6fa3499c'></script></head><body><script>!function(a,b,c,d,e,f){a.ddjskey=e;a.ddoptions=f||null;var m=b.createElement(c),n=b.getElementsByTagName(c)[0];m.async=1,m.src=d,n.parentNode.insertBefore(m,n)}(window,document,"script","https://js.datadome.co/tags.js","99B1C08278137CE22ADB60CE8DE020", {"ajaxListenerPath": true});</script>
-<body bgcolor='black' style='margin:0' oncontextmenu='return false' onkeydown='return false' onmousedown='return false'><script>!function(a,b,c,d,e,f){a.ddjskey=e;a.ddoptions=f||null;var m=b.createElement(c),n=b.getElementsByTagName(c)[0];m.async=1,m.src=d,n.parentNode.insertBefore(m,n)}(window,document,"script","https://js.datadome.co/tags.js","99B1C08278137CE22ADB60CE8DE020", {"ajaxListenerPath": true});</script>
-<center> 
-<div data-shaka-player-container style='width: 100%; height: 100%'><video autoplay data-shaka-player id='video' style='width:100%;height:100%;'></video></div>
-<script> 
-async function init() { 
-const video = document.getElementById('video'); 
-const ui = video['ui']; 
-const controls = ui.getControls(); 
-const player = controls.getPlayer(); 
-player.configure({
-  drm: {
-    clearKeys: {
-      // 'key-id-in-hex': 'key-in-hex',
-      '8e269c8aa32ad77eb83068312343d610': 'd12ccebafbba2a535d88a3087f884252'
+  
+<script src='https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/shaka-player.ui.min.js' crossorigin='anonymous'></script>
+<!-- <script src="./shaka.php?js=16888&libraryfont=Arial"></script> -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/controls.min.css' crossorigin='anonymous' />
+
+<center><b><p style="color:white; opacity:0.27;">EJALTV</b></p>
+<body>
+<style>
+    /* Add your gradient styles here */
+    .shaka-seek-bar-container .shaka-seek-bar {
+      background:  linear-gradient(to right, #051937, #00205b, #00247e, #22229f, #510dbc);
     }
+.shaka-volume-bar-container .shaka-volume-bar {
+      background:  linear-gradient(to right, #051937, #00205b, #00247e, #22229f, #510dbc);
+    }
+    /* Change color of all Shaka Player SVG icons */
+    .shaka-video-container .material-icons-round {
+      color: #00abe2;
+    }
+.shaka-spinner-path {
+  stroke-dasharray: 1, 2000;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+@keyframes color {
+  100%,
+  0% {
+    stroke: #d62d20;
   }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%,
+  90% {
+    stroke: #ffa700;
+  }
+}
+  </style>
+<div data-shaka-player-container style='position:absolute;z-index: -1;top: 0;left: 0;width: 100%; height: 100%;object-fit: cover;'><video autoplay data-shaka-player poster="https://github.com/hpmurah2u/pejal/blob/PEJAL/ejaltv%20loading%20baru.png?raw=true" id='video' style='width:100%;height:100%;'></video>
+</div>
+  <script>
+
+const manifestUri = "https://linearjitp-playback.astro.com.my/dash-wv/linear/2406/default_ott.mpd";
+async function init() {
+const video = document.getElementById('video');
+const ui = video['ui'];
+const controls = ui.getControls();
+const player = controls.getPlayer();
+window.player = player;
+window.ui = ui;
+player.setTextTrackVisibility(true);
+player.configure({
+drm: {"clearKeys": {
+      '8e269c8aa32ad77eb83068312343d610':'d12ccebafbba2a535d88a3087f884252'},
+},
+  
+abr: {
+				defaultBandwidthEstimate: 16888,
+                enabled: true,
+                restrictions: {
+  			    minHeight: 359,
+  			    maxHeight: 720  		        }
+			},
 });
-//player.configure({drm:{servers:{'com.widevine.alpha':'https://license.dstv.com/widevine/getLicense?CrmId=afl&AccountId=afl&ContentId=SH2&SessionId=D3C00F885C24B9C6&Ticket=C839A8D71AB94299'}}}); 
-window.player = player; 
-window.ui = ui; 
-player.addEventListener('error', onPlayerErrorEvent); 
-controls.addEventListener('error', onUIErrorEvent); 
-try{await player.load('https://linearjitp02-playback.astro.com.my/dash-wv/linear/2406/default.mpd'); 
-console.log('The video has now been loaded!');} catch (error) {onPlayerError(error);}} 
-function onPlayerErrorEvent(errorEvent) {onPlayerError(event.detail);} 
-function onPlayerError(error) {console.error('Error code', error.code, 'object', error);} 
-function onUIErrorEvent(errorEvent) {onPlayerError(event.detail);} 
-function initFailed(errorEvent) {console.error('Unable to load the UI library!');} 
-document.addEventListener('shaka-ui-loaded', init); 
-document.addEventListener('shaka-ui-load-failed', initFailed); 
-</script>
-<script type='text/javascript' src='https://encrypt2.skycdn.ga/udp/Counter'></script>
-<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6ebfddfd6fa3499c',m:'D4YJv6au4IB.PA2DqTLxZStJydWh51fiwv2G9eC_8Gk-1647290874-0-AYjwUV5YDhzDCl2C9r7Xi8tcRCaEcQTbCAMGCeTNqDvB45L3MnGBdkKHu6G387dXhgYcctN3ANz21D9fu1HhsRAcyKR0VCGqS9aNi6PQ8MvMDWfoO6WhJhqlukHMDXtYfg==',s:[0x6c6fafcade,0x9f5e65094f],u:'/cdn-cgi/challenge-platform/h/g'}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"6ebfddfd6fa3499c","version":"2021.12.0","r":1,"token":"a919438182254588b33b5297605b9ab4","si":100}' crossorigin="anonymous"></script>
-</html>
+player.addEventListener('error', onPlayerErrorEvent);
+controls.addEventListener('error', onUIErrorEvent);
+try {
+await player.load(manifestUri);
+console.log('The video has now been loaded!');
+} catch (error) {
+onPlayerError(error);
+}
 
 
+
+}
+
+function onPlayerErrorEvent(errorEvent) {
+onPlayerError(event.detail);
+}
+
+function onPlayerError(error) {
+console.error('Error code', error.code, 'object', error);
+}
+
+function onUIErrorEvent(errorEvent) {
+onPlayerError(event.detail);
+}
+
+function initFailed(errorEvent) {
+console.error('Unable to load the UI library!');
+}
+document.addEventListener('shaka-ui-loaded', init);
+document.addEventListener('shaka-ui-load-failed', initFailed);
+  
+  
+  </script>
